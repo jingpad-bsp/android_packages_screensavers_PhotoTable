@@ -298,7 +298,8 @@ public abstract class PhotoSource {
             int longSide, int shortSide) {
         Bitmap image = null;
         ImageData data = mImageMap.get(current);
-        if (current != null) {
+        // Add for bug1398875, NPE occurs when click the unsupported format picture that appears.
+        if (current != null && data != null) {
           ImageData prev = data.naturalPrevious();
           if (prev != null) {
             image = load(prev, options, longSide, shortSide);
